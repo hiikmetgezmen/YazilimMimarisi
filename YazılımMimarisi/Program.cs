@@ -8,6 +8,7 @@ namespace YazılımMimarisi
 {
     static class Program
     {
+        public static string DieticianId { get; set; }
         /// <summary>
         /// Uygulamanın ana girdi noktası.
         /// </summary>
@@ -17,6 +18,7 @@ namespace YazılımMimarisi
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
+           
         }
     }
 }

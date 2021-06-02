@@ -1,11 +1,11 @@
 namespace YazılımMimarisi.Models.Common.Enums {
-    public class ResponseType {
+    public class ResponseStatus {
         //* Enum kullanımı gibi string kullanımı bknz:https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp?page=1&tab=votes#tab-top
-        public ResponseType (string value) { Value = value; }
+        public ResponseStatus(string value) { Value = value; }
         public string Value { get; set; }
-        public static ResponseType Success { get { return new ResponseType (nameof (Success)); } }
-        public static ResponseType Info { get { return new ResponseType (nameof (Info)); } }
-        public static ResponseType Warning { get { return new ResponseType (nameof (Warning)); } }
-        public static ResponseType Error { get { return new ResponseType (nameof (Error)); } }
+        public static ResponseStatus Success { get { return new ResponseStatus(nameof (Success)); } }
+        public static ResponseStatus Info { get { return new ResponseStatus(nameof (Info)); } }
+        public static ResponseStatus Warning { get { return new ResponseStatus(nameof (Warning)); } }
+        public static ResponseStatus Error { get { return new ResponseStatus(nameof (Error)); } }
     }
 }

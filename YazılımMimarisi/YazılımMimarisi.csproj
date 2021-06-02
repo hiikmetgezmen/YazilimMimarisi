@@ -126,6 +126,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Admins\AdminService.cs" />
+    <Compile Include="Services\Dieticians\DieticianService.cs" />
+    <Compile Include="Services\Interfaces\IDieticianService.cs" />
     <Compile Include="Services\Interfaces\IAdminService.cs" />
     <EmbeddedResource Include="AdminPaneli.resx">
       <DependentUpon>AdminPaneli.cs</DependentUpon>
@@ -166,8 +168,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Dieticians\" />
     <Folder Include="Services\Diets\" />
+    <Folder Include="Services\Disease\" />
     <Folder Include="Services\Foods\" />
     <Folder Include="Services\Patients\" />
   </ItemGroup>

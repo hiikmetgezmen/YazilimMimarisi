@@ -35,6 +35,8 @@ namespace YazılımMimarisi
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,11 +44,11 @@ namespace YazılımMimarisi
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(223, 56);
+            this.label2.Location = new System.Drawing.Point(365, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 20);
+            this.label2.Size = new System.Drawing.Size(129, 20);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Kullanıcı Ekranı";
+            this.label2.Text = "{diyetisyen adı}";
             // 
             // label1
             // 
@@ -69,7 +71,7 @@ namespace YazılımMimarisi
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(518, 339);
+            this.button2.Location = new System.Drawing.Point(421, 338);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
@@ -79,7 +81,7 @@ namespace YazılımMimarisi
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(322, 146);
+            this.button1.Location = new System.Drawing.Point(232, 146);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(84, 23);
             this.button1.TabIndex = 4;
@@ -96,11 +98,32 @@ namespace YazılımMimarisi
             this.button3.Text = "Rapor Oluştur";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(90, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(131, 20);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Kullanıcı Ekranı";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(322, 146);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(84, 23);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Diyet Yaz";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
             // KullaniciEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 373);
+            this.ClientSize = new System.Drawing.Size(514, 373);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -110,6 +133,7 @@ namespace YazılımMimarisi
             this.Name = "KullaniciEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KullaniciEkrani";
+            this.Load += new System.EventHandler(this.KullaniciEkrani_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -124,5 +148,7 @@ namespace YazılımMimarisi
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button4;
     }
 }

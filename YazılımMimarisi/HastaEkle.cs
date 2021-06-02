@@ -33,7 +33,7 @@ namespace YazılımMimarisi
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || comboBox1.Text == "" || comboBox2.Text == "")
+            if (txt_tcno.Text == "" || txt_name.Text == "" || txt_surname.Text == "" || textBox4.Text == "" || textBox5.Text == "" || txt_email.Text == "" || comboBox1.Text == "" || cmbox_disease.Text == "")
             {
                 MessageBox.Show("Lütfen boş kutu bırakmayınız...");
             }

@@ -1,43 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using YazılımMimarisi.Models.Common;
+using YazılımMimarisi.Models.Common.Enums;
 using YazılımMimarisi.Models.Entities.Persons;
 using YazılımMimarisi.Services.Admins;
+using YazılımMimarisi.Services.Dieticians;
 using YazılımMimarisi.Services.Interfaces;
 
 namespace YazılımMimarisi
 {
     public partial class Login : Form
     {
-
-        private  IAdminService _adminService;
+        private  IDieticianService _dieticianService;
         public Login()
         {
             InitializeComponent();
         }
-        public Login(IAdminService _adminService)
+        public Login(IDieticianService _dieticianService)
         { 
           
-            this._adminService = _adminService;
+            this._dieticianService = _dieticianService;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void btn_login_Click(object sender, EventArgs e)
         {
-            if(textBox1.Text == "" || textBox2.Text == "" )
+            if (txtbox_username.Text == "" || txtbox_password.Text == "")
             {
                 MessageBox.Show("Lütfen boş kutu bırakmayınız...");
             }
             else
             {
-                if (textBox1.Text == "a")
+                if (txtbox_username.Text == "admin" && txtbox_password.Text =="admin")
                 {
                     //AdminPaneli sayfasına git
                     AdminPaneli frm = new AdminPaneli();
@@ -46,10 +40,22 @@ namespace YazılımMimarisi
                 }
                 else
                 {
-                    //KullaniciEkrani sayfasına git
-                    KullaniciEkrani frm = new KullaniciEkrani();
-                    frm.ShowDialog();
-                    this.Visible = false;
+                    HttpClient _client = new HttpClient();
+                    _dieticianService = new DieticianService(_client);
+                    Dietician dietician = new Dietician() {Username = txtbox_username.Text,Password = txtbox_password.Text };
+                    BaseResponse<Dietician> response = await _dieticianService.Login(dietician);
+                    if (response.Status.Value== ResponseStatus.Success.Value)
+                    {
+                        Program.DieticianId = response.Content[0].Id;
+                        //KullaniciEkrani sayfasına git
+                        KullaniciEkrani frm = new KullaniciEkrani();
+                        frm.ShowDialog();
+                        this.Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Böyle bir kullanıcı bulunamadı veya şifre hatalı.");
+                    }
                 }
             }
         }
@@ -57,15 +63,6 @@ namespace YazılımMimarisi
         private void Login_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private async void button2_Click(object sender, EventArgs e)
-        {
-            HttpClient _client = new HttpClient();
-            _adminService = new AdminService(_client);
-            BaseResponse<Admin> response = await _adminService.GetAdmin("60b65e6de22dcb482f0ff874");
-            Admin admin = response.Content[0];
-            MessageBox.Show(admin.Password);
         }
     }
 }

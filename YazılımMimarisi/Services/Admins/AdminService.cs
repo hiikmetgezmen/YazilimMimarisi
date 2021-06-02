@@ -21,14 +21,12 @@ namespace YazılımMimarisi.Services.Admins
         public AdminService(HttpClient client)
         {
             _client = client;
+            _client.BaseAddress = new Uri("http://localhost:5000");
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-
         public async Task<BaseResponse<Admin>> GetAdmin(string id)
         {
-            _client.BaseAddress =new Uri( "http://localhost:5000");
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
             try
             {
                 var response = await _client.GetAsync($"/api/v1/Admin/{id}");
