@@ -13,13 +13,14 @@ using YazılımMimarisi.Models.Common.Enums;
 using YazılımMimarisi.Models.Entities.Persons;
 using YazılımMimarisi.Services.Dieticians;
 using YazılımMimarisi.Services.Interfaces;
+using YazılımMimarisi.Services.Patients;
 
 namespace YazılımMimarisi
 {
     public partial class KullaniciEkrani : Form
     {
         IDieticianService _dieticianService;
-
+        IPatientService _patientService;
         public KullaniciEkrani()
         {
             InitializeComponent();
@@ -41,7 +42,12 @@ namespace YazılımMimarisi
             this.Close();
         }
 
-        private async void KullaniciEkrani_Load(object sender, EventArgs e)
+        private void KullaniciEkrani_Load(object sender, EventArgs e)
+        {
+            GetDieticianName();
+            PatientsLoadDataGrid();
+        }
+        private async void GetDieticianName()
         {
             HttpClient _client = new HttpClient();
             _dieticianService = new DieticianService(_client);
@@ -54,7 +60,21 @@ namespace YazılımMimarisi
             {
                 MessageBox.Show("Böyle bir kullanıcı bulunamadı veya şifre hatalı.");
             }
-           
+        }
+
+        private async void PatientsLoadDataGrid()
+        {
+            HttpClient _client = new HttpClient();
+            _patientService = new PatientService(_client);
+            BaseResponse<Patient> response = await _patientService.GetAllPatient();
+            if (response.Status.Value == ResponseStatus.Success.Value)
+            {
+                dataGridView1.DataSource = response.Content;
+            }
+            else
+            {
+                MessageBox.Show("Bir hata oluştu.");
+            }
         }
     }
 }

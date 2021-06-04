@@ -17,11 +17,6 @@ namespace YazılımMimarisi
         {
             InitializeComponent();
         }
-        public Login(IDieticianService _dieticianService)
-        { 
-          
-            this._dieticianService = _dieticianService;
-        }
 
         private async void btn_login_Click(object sender, EventArgs e)
         {

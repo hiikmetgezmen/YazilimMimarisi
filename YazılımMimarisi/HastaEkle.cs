@@ -4,22 +4,28 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YazılımMimarisi.Models.Common;
+using YazılımMimarisi.Models.Common.Enums;
+using YazılımMimarisi.Models.Entities.Diseases;
+using YazılımMimarisi.Models.Entities.Persons;
+using YazılımMimarisi.Services.Diseases;
+using YazılımMimarisi.Services.Interfaces;
+using YazılımMimarisi.Services.Patients;
 
 namespace YazılımMimarisi
 {
     public partial class HastaEkle : Form
     {
+        private IPatientService _patientService;
+        private IDiseaseService _diseaseService;
+        
         public HastaEkle()
         {
             InitializeComponent();
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -28,16 +34,57 @@ namespace YazılımMimarisi
                 KullaniciEkrani frm = new KullaniciEkrani();
                 frm.Show();
                 this.Close();
-            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            if (txt_tcno.Text == "" || txt_name.Text == "" || txt_surname.Text == "" || textBox4.Text == "" || textBox5.Text == "" || txt_email.Text == "" || comboBox1.Text == "" || cmbox_disease.Text == "")
+            if (txt_tcno.Text == "" || txt_name.Text == "" || txt_surname.Text == "" || txt_email.Text == "" || cmbox_disease.Text == "")
             {
                 MessageBox.Show("Lütfen boş kutu bırakmayınız...");
             }
-          
+            else
+            {
+                HttpClient _client = new HttpClient();
+                _patientService = new PatientService(_client);
+                Contact contact = new Contact() { Email = txt_email.Text };
+                Patient patient = new Patient() {IDNumber=txt_tcno.Text,Name=txt_name.Text,LastName=txt_surname.Text, Contact = contact, DiseaseIds = new List<string>() {cmbox_disease.SelectedItem.ToString() } };
+                BaseResponse<Patient> response = await _patientService.CreatePatient(patient);
+                if (response.Status.Value == ResponseStatus.Success.Value)
+                {
+                    KullaniciEkrani frm = new KullaniciEkrani();
+                    frm.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Hasta oluşturulamadı bilgileri doğru girdiğinizden emin olun.");
+                }
+            }
+        }
+
+        private  void HastaEkle_Load(object sender, EventArgs e)
+        {
+            DiseaseCmbBoxLoader();
+        }
+        
+        private async void DiseaseCmbBoxLoader()
+        {
+            HttpClient _client = new HttpClient();
+            _diseaseService = new DiseaseService(_client);
+            BaseResponse<Disease> response = await _diseaseService.GetAllDisease();
+            if (response.Status.Value == ResponseStatus.Success.Value)
+            {
+                List<string> diseaseName = new List<string>();
+                foreach (var item in response.Content)
+                {
+                    diseaseName.Add(item.Name);
+                }
+                cmbox_disease.DataSource = diseaseName;
+            }
+            else
+            {
+                MessageBox.Show("API Hastalıkları çekerken bir hata oluştu");
+            }
         }
     }
 }

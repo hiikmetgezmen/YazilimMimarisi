@@ -147,7 +147,6 @@ namespace YazılımMimarisi
             this.label8.Size = new System.Drawing.Size(39, 13);
             this.label8.TabIndex = 5;
             this.label8.Text = "E-Mail:";
-            this.label8.Click += new System.EventHandler(this.label6_Click);
             // 
             // HastaEkle
             // 
@@ -169,6 +168,7 @@ namespace YazılımMimarisi
             this.Name = "HastaEkle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HastaEkle";
+            this.Load += new System.EventHandler(this.HastaEkle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
