@@ -95,6 +95,12 @@
     <Compile Include="DiyetisyenEkle.Designer.cs">
       <DependentUpon>DiyetisyenEkle.cs</DependentUpon>
     </Compile>
+    <Compile Include="DiyetYöntemiEkle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiyetYöntemiEkle.Designer.cs">
+      <DependentUpon>DiyetYöntemiEkle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="HastaEkle.cs">
       <SubType>Form</SubType>
@@ -133,9 +139,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Admins\AdminService.cs" />
     <Compile Include="Services\Dieticians\DieticianService.cs" />
+    <Compile Include="Services\DietMethods\DietMethodService.cs" />
+    <Compile Include="Services\Diets\DietService.cs" />
     <Compile Include="Services\Diseases\DiseaseService.cs" />
     <Compile Include="Services\Interfaces\IDieticianService.cs" />
     <Compile Include="Services\Interfaces\IAdminService.cs" />
+    <Compile Include="Services\Interfaces\IDietMethodService.cs" />
+    <Compile Include="Services\Interfaces\IDietService.cs" />
     <Compile Include="Services\Interfaces\IDiseaseService.cs" />
     <Compile Include="Services\Interfaces\IPatientService.cs" />
     <Compile Include="Services\Patients\PatientService.cs" />
@@ -147,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DiyetisyenEkle.resx">
       <DependentUpon>DiyetisyenEkle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiyetYöntemiEkle.resx">
+      <DependentUpon>DiyetYöntemiEkle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HastaEkle.resx">
       <DependentUpon>HastaEkle.cs</DependentUpon>
@@ -181,7 +194,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Diets\" />
     <Folder Include="Services\Foods\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,6 +7,7 @@ namespace YazılımMimarisi.Services.Interfaces
     public interface IPatientService
     {
         Task<BaseResponse<Patient>> GetPatient(string id);
+        Task<BaseResponse<Patient>> GetAllPatientByDietician(string dieticianId);
         Task<BaseResponse<Patient>> GetAllPatient();
         Task<BaseResponse<Patient>> DeletePatient(Patient model);
         Task<BaseResponse<Patient>> CreatePatient(Patient model);

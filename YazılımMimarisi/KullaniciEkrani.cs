@@ -76,5 +76,18 @@ namespace YazılımMimarisi
                 MessageBox.Show("Bir hata oluştu.");
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Diet sayfasına git
+            DiyetEkle frm = new DiyetEkle();
+            frm.Show();
+            this.Close();
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace YazılımMimarisi
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.cmb_box_patients = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb_box_dietmethod = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,6 +49,7 @@ namespace YazılımMimarisi
             this.button1.TabIndex = 0;
             this.button1.Text = "Ekle";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -58,6 +59,7 @@ namespace YazılımMimarisi
             this.button2.TabIndex = 1;
             this.button2.Text = "Geri Dön";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dateTimePicker1
             // 
@@ -81,13 +83,13 @@ namespace YazılımMimarisi
             this.cmb_box_patients.Size = new System.Drawing.Size(153, 21);
             this.cmb_box_patients.TabIndex = 4;
             // 
-            // comboBox1
+            // cmb_box_dietmethod
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(189, 118);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(153, 21);
-            this.comboBox1.TabIndex = 5;
+            this.cmb_box_dietmethod.FormattingEnabled = true;
+            this.cmb_box_dietmethod.Location = new System.Drawing.Point(189, 118);
+            this.cmb_box_dietmethod.Name = "cmb_box_dietmethod";
+            this.cmb_box_dietmethod.Size = new System.Drawing.Size(153, 21);
+            this.cmb_box_dietmethod.TabIndex = 5;
             // 
             // label1
             // 
@@ -134,7 +136,7 @@ namespace YazılımMimarisi
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmb_box_dietmethod);
             this.Controls.Add(this.cmb_box_patients);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
@@ -142,6 +144,7 @@ namespace YazılımMimarisi
             this.Controls.Add(this.button1);
             this.Name = "DiyetEkle";
             this.Text = "DiyetEkle";
+            this.Load += new System.EventHandler(this.DiyetEkle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,7 +157,7 @@ namespace YazılımMimarisi
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.ComboBox cmb_box_patients;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmb_box_dietmethod;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

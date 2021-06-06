@@ -52,7 +52,19 @@ namespace YazılımMimarisi.Services.Patients
             }
             return null;
         }
-
+        public async Task<BaseResponse<Patient>> GetAllPatientByDietician(string dieticianId)
+        {
+            try
+            {
+                var response = await _client.GetAsync($"/api/v1/Patient/dieticianid/{dieticianId}");
+                return await response.ReadContentAs<BaseResponse<Patient>>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return null;
+        }
         public async Task<BaseResponse<Patient>> CreatePatient(Patient model)
         {
             try
@@ -85,7 +97,7 @@ namespace YazılımMimarisi.Services.Patients
         {
             try
             {
-                var response = await _client.DeleteAsJsonAsync($"/api/v1/Patient/{model.Id}");
+                var response = await _client.PutAsJsonAsync($"/api/v1/Patient/",model);
                 return await response.ReadContentAs<BaseResponse<Patient>>();
             }
             catch (Exception ex)
@@ -94,5 +106,7 @@ namespace YazılımMimarisi.Services.Patients
             }
             return null;
         }
+
+
     }
 }
