@@ -142,11 +142,13 @@
     <Compile Include="Services\DietMethods\DietMethodService.cs" />
     <Compile Include="Services\Diets\DietService.cs" />
     <Compile Include="Services\Diseases\DiseaseService.cs" />
+    <Compile Include="Services\Foods\FoodService.cs" />
     <Compile Include="Services\Interfaces\IDieticianService.cs" />
     <Compile Include="Services\Interfaces\IAdminService.cs" />
     <Compile Include="Services\Interfaces\IDietMethodService.cs" />
     <Compile Include="Services\Interfaces\IDietService.cs" />
     <Compile Include="Services\Interfaces\IDiseaseService.cs" />
+    <Compile Include="Services\Interfaces\IFoodService.cs" />
     <Compile Include="Services\Interfaces\IPatientService.cs" />
     <Compile Include="Services\Patients\PatientService.cs" />
     <EmbeddedResource Include="AdminPaneli.resx">
@@ -193,8 +195,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Foods\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

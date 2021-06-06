@@ -66,7 +66,7 @@ namespace YazılımMimarisi
         {
             HttpClient _client = new HttpClient();
             _patientService = new PatientService(_client);
-            BaseResponse<Patient> response = await _patientService.GetAllPatient();
+            BaseResponse<Patient> response = await _patientService.GetAllPatientByDietician(Program.DieticianId);
             if (response.Status.Value == ResponseStatus.Success.Value)
             {
                 dataGridView1.DataSource = response.Content;
@@ -79,7 +79,10 @@ namespace YazılımMimarisi
 
         private void button5_Click(object sender, EventArgs e)
         {
-           
+            //DietYönetmi sayfasına git
+            DiyetYöntemiEkle frm = new DiyetYöntemiEkle();
+            frm.Show();
+            this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)

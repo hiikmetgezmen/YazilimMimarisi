@@ -32,38 +32,46 @@ namespace YazılımMimarisi
         private async void button1_Click(object sender, EventArgs e)
         {
             HttpClient _client = new HttpClient();
-            _dietService = new DietService(_client);
-            Diet diet = new Diet() {
-                StartDate = dateTimePicker1.Value,
-                EndDate = dateTimePicker2.Value,
-                DietMethodId = ((KeyValuePair<string, string>)cmb_box_dietmethod.SelectedItem).Key
-            };
-            BaseResponse<Diet> response = await _dietService.CreateDiet(diet);
-            if (response.Status.Value == ResponseStatus.Success.Value)
+            _dietMethodService = new DietMethodService(_client);
+            BaseResponse<DietMethod> dietMethodResponse = await _dietMethodService.GetDietMethod(((KeyValuePair<string, string>)cmb_box_dietmethod.SelectedItem).Key);
+            if (dietMethodResponse.Status.Value == ResponseStatus.Success.Value)
             {
-                _client = new HttpClient();
-                _patientService = new PatientService(_client);
-                string patientId = ((KeyValuePair<string, string>)cmb_box_patients.SelectedItem).Key;
-                BaseResponse<Patient> getPatientResponse = await _patientService.GetPatient(patientId);
-                getPatientResponse.Content[0].DietId = response.Content[0].Id;
-                BaseResponse<Patient> updatePatientResponse = await _patientService.UpdatePatient(getPatientResponse.Content[0]);
-                if (updatePatientResponse.Status.Value != ResponseStatus.Success.Value)
+                 _client = new HttpClient();
+                _dietService = new DietService(_client);
+                Diet diet = new Diet()
                 {
-                    MessageBox.Show("Hasta güncellenemedi");
+                    StartDate = dateTimePicker1.Value,
+                    EndDate = dateTimePicker2.Value,
+                    DietMethodId = ((KeyValuePair<string, string>)cmb_box_dietmethod.SelectedItem).Key,
+                    DietFoodList = dietMethodResponse.Content[0].FoodIds
+
+                };
+                BaseResponse<Diet> response = await _dietService.CreateDiet(diet);
+                if (response.Status.Value == ResponseStatus.Success.Value)
+                {
+                    _client = new HttpClient();
+                    _patientService = new PatientService(_client);
+                    string patientId = ((KeyValuePair<string, string>)cmb_box_patients.SelectedItem).Key;
+                    BaseResponse<Patient> getPatientResponse = await _patientService.GetPatient(patientId);
+                    getPatientResponse.Content[0].DietId = response.Content[0].Id;
+                    BaseResponse<Patient> updatePatientResponse = await _patientService.UpdatePatient(getPatientResponse.Content[0]);
+                    if (updatePatientResponse.Status.Value != ResponseStatus.Success.Value)
+                    {
+                        MessageBox.Show("Hasta güncellenemedi");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Diyet başarılı bir şekilde oluşturuldu");
+                        //KullaniciEkrani sayfasına git
+                        KullaniciEkrani frm = new KullaniciEkrani();
+                        frm.Show();
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Diyet başarılı bir şekilde oluşturuldu");
-                    //KullaniciEkrani sayfasına git
-                    KullaniciEkrani frm = new KullaniciEkrani();
-                    frm.Show();
-                    this.Close();
+                    MessageBox.Show("Diyet oluşturulamadı");
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Diyet oluşturulamadı");
             }
         }
 
