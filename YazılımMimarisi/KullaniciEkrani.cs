@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using YazılımMimarisi.Models.Common;
 using YazılımMimarisi.Models.Common.Enums;
+using YazılımMimarisi.Models.Entities.Diseases;
 using YazılımMimarisi.Models.Entities.Persons;
 using YazılımMimarisi.Services.Dieticians;
+using YazılımMimarisi.Services.Diseases;
 using YazılımMimarisi.Services.Interfaces;
 using YazılımMimarisi.Services.Patients;
 
@@ -21,6 +23,7 @@ namespace YazılımMimarisi
     {
         IDieticianService _dieticianService;
         IPatientService _patientService;
+        IDiseaseService _diseaseService;
         public KullaniciEkrani()
         {
             InitializeComponent();
@@ -69,7 +72,7 @@ namespace YazılımMimarisi
             BaseResponse<Patient> response = await _patientService.GetAllPatientByDietician(Program.DieticianId);
             if (response.Status.Value == ResponseStatus.Success.Value)
             {
-                dataGridView1.DataSource = response.Content;
+                LoadDataGridView(response.Content);
             }
             else
             {
@@ -77,6 +80,38 @@ namespace YazılımMimarisi
             }
         }
 
+        private async void LoadDataGridView(List<Patient> content)
+        { 
+            DataTable dt = new DataTable();
+            Patient p = new Patient() { };
+            //p
+            dt.Columns.Add("IDNumber", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("LastName", typeof(string));
+            dt.Columns.Add("Disease", typeof(string));
+
+            foreach (var item in content)
+            {
+                HttpClient _client = new HttpClient();
+                _diseaseService = new DiseaseService(_client);
+                BaseResponse<Disease> response = await _diseaseService.GetDisease(item.DiseaseIds[0]);
+                dt.Rows.Add(item.IDNumber, item.Name,item.LastName,response.Content[0].Name);
+            }
+            Dictionary<string, string> dictMapping = new Dictionary<string, string>();
+            dictMapping.Add("IDNumber", "TC Numarası");
+            dictMapping.Add("Name", "Adı");
+            dictMapping.Add("LastName", "Soyadı");
+            dictMapping.Add("Disease", "Hastalığı");
+            dataGridView1.DataSource = dt;
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                string colheader = col.HeaderText;
+                var key = dictMapping.Keys.FirstOrDefault(k => k == colheader);
+                if (key != null)
+                    col.HeaderText = dictMapping[key];
+            }
+
+        }
         private void button5_Click(object sender, EventArgs e)
         {
             //DietYönetmi sayfasına git
