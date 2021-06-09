@@ -127,5 +127,13 @@ namespace YazılımMimarisi
             frm.Show();
             this.Close();
         }
+
+        private void btn_report_create_Click(object sender, EventArgs e)
+        {
+            //Rapor sayfasına git
+            RaporOluştur frm = new RaporOluştur();
+            frm.Show();
+            this.Close();
+        }
     }
 }

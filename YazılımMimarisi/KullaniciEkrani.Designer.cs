@@ -34,7 +34,7 @@ namespace YazılımMimarisi
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_create = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -90,14 +90,15 @@ namespace YazılımMimarisi
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button3
+            // btn_create
             // 
-            this.button3.Location = new System.Drawing.Point(414, 117);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Rapor Oluştur";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_create.Location = new System.Drawing.Point(414, 117);
+            this.btn_create.Name = "btn_create";
+            this.btn_create.Size = new System.Drawing.Size(84, 23);
+            this.btn_create.TabIndex = 9;
+            this.btn_create.Text = "Rapor Oluştur";
+            this.btn_create.UseVisualStyleBackColor = true;
+            this.btn_create.Click += new System.EventHandler(this.btn_report_create_Click);
             // 
             // label3
             // 
@@ -137,7 +138,7 @@ namespace YazılımMimarisi
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_create);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -160,7 +161,7 @@ namespace YazılımMimarisi
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_create;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;

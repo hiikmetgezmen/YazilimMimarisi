@@ -137,6 +137,12 @@
     <Compile Include="Models\Entities\Persons\Patient .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RaporOluştur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RaporOluştur.Designer.cs">
+      <DependentUpon>RaporOluştur.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\Admins\AdminService.cs" />
     <Compile Include="Services\Dieticians\DieticianService.cs" />
     <Compile Include="Services\DietMethods\DietMethodService.cs" />
@@ -181,6 +187,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RaporOluştur.resx">
+      <DependentUpon>RaporOluştur.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
