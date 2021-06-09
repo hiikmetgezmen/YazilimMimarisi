@@ -67,11 +67,35 @@ namespace YazılımMimarisi
                     BaseResponse<DietMethod> dietMethodService = await _dietMethodService.GetDietMethod(dietResponse.Content[0].DietMethodId);
                     if (rd_btn_html.Checked)
                     {
-                        WriteHTMLFile("Rapor.html", patient, diseaseResponse.Content[0], dietResponse.Content[0], dietMethodService.Content[0],foods);
+                        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                        saveFileDialog1.Filter = "HTML|*.html";
+                        saveFileDialog1.Title = "Save an HTML File";
+                        saveFileDialog1.ShowDialog();
+                        if (saveFileDialog1.FileName!="")
+                        {
+                            WriteHTMLFile(saveFileDialog1.FileName, patient, diseaseResponse.Content[0], dietResponse.Content[0], dietMethodService.Content[0], foods);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dosya Adını boş bırakmayın");
+                        }
+                        
                     }
                     else if (rd_btn_json.Checked)
                     {
-                        WriteJSONFile("Rapor.json", patient, diseaseResponse.Content[0], dietResponse.Content[0], dietMethodService.Content[0], foods);
+                        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                        saveFileDialog1.Filter = "JSON|*.json";
+                        saveFileDialog1.Title = "Save an JSON File";
+                        saveFileDialog1.ShowDialog();
+                        if (saveFileDialog1.FileName != "")
+                        {
+                            WriteJSONFile(saveFileDialog1.FileName, patient, diseaseResponse.Content[0], dietResponse.Content[0], dietMethodService.Content[0], foods);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dosya Adını boş bırakmayın");
+                        }
+                       
                     }
                     else
                     {
