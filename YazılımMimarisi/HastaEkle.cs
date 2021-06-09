@@ -47,7 +47,7 @@ namespace YazılımMimarisi
                 HttpClient _client = new HttpClient();
                 _patientService = new PatientService(_client);
                 Contact contact = new Contact() { Email = txt_email.Text };
-                Patient patient = new Patient() {IDNumber=txt_tcno.Text,Name=txt_name.Text,LastName=txt_surname.Text, Contact = contact, DiseaseIds = new List<string>() {cmbox_disease.SelectedItem.ToString() } };
+                Patient patient = new Patient() {IDNumber=txt_tcno.Text,Name=txt_name.Text,LastName=txt_surname.Text, Contact = contact, DiseaseIds = new List<string>() { ((KeyValuePair<string, string>)cmbox_disease.SelectedItem).Key },DieticianId=Program.DieticianId };
                 BaseResponse<Patient> response = await _patientService.CreatePatient(patient);
                 if (response.Status.Value == ResponseStatus.Success.Value)
                 {
@@ -74,12 +74,17 @@ namespace YazılımMimarisi
             BaseResponse<Disease> response = await _diseaseService.GetAllDisease();
             if (response.Status.Value == ResponseStatus.Success.Value)
             {
-                List<string> diseaseName = new List<string>();
-                foreach (var item in response.Content)
+                if (response.Content.Count > 0)
                 {
-                    diseaseName.Add(item.Name);
+                    Dictionary<string, string> disease = new Dictionary<string, string>();
+                    foreach (var item in response.Content)
+                    {
+                        disease.Add(item.Id, item.Name);
+                    }
+                    cmbox_disease.DataSource = new BindingSource(disease, null);
+                    cmbox_disease.DisplayMember = "Value";
+                    cmbox_disease.ValueMember = "Key";
                 }
-                cmbox_disease.DataSource = diseaseName;
             }
             else
             {
